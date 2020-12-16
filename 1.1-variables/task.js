@@ -11,9 +11,7 @@ function averageMark(a, g, p) {
 }
 
 function sayHello(userName) {
-	
-    let myName = `Привет, мир! Меня зовут ${userName}`
-    
+	let myName = `Привет, мир! Меня зовут ${userName[0].toUpperCase() + userName.slice(1).toLowerCase()}`;
 	return myName;
 }
 
