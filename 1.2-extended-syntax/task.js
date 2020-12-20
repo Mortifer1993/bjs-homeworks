@@ -28,6 +28,11 @@ function getAverageMark(marks){
 }
 
 function askDrink(name,dateOfBirthday){
-    // код для задачи №3 писать здесь
-    // return result;
+    let userName = name[0].toUpperCase() + name.substring(1).toLowerCase()
+    let nowDate = new Date().getFullYear();
+    let userAge = nowDate - dateOfBirthday.getFullYear();
+    if( userAge < 18 ) {
+        return `Сожалею, ${userName}, но я не могу вам продать алкоголь. Могу предложить вам замечательный клюквенный компот!`
+    }
+    return `Не желаете ли олд-фэшн, ${userName}?`
 }
