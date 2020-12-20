@@ -1,4 +1,4 @@
-// 'use strict'
+'use strict'
 
 function getResult(a, b, c){
     let x= [];
@@ -12,12 +12,22 @@ function getResult(a, b, c){
     return x;
 }
 
-// function getAverageMark(marks){
-//     // код для задачи №2 писать здесь
-//     // return averageMark;
-// }
+function getAverageMark(marks){
+    if ( marks.length > 0) {
+        if ( marks.length > 5) {
+            console.log('Колличество оценок превышает значение 5.\nДля подсчета средней оценки будут взяты первые 5 значений,\nостальные будут отброшены.');
+        }
+        marks = marks.slice(0, 5);
+        let value = 0
+        for (let i = 0; i < marks.length; i++){
+            value += marks[i]
+        }
+        return value / marks.length;
+    }
+    return 0;
+}
 
-// function askDrink(name,dateOfBirthday){
-//     // код для задачи №3 писать здесь
-//     // return result;
-// }
+function askDrink(name,dateOfBirthday){
+    // код для задачи №3 писать здесь
+    // return result;
+}
