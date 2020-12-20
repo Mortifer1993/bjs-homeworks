@@ -1,3 +1,5 @@
+'use strict'
+
 function getResult(a,b,c){
     // код для задачи №1 писать здесь
     // return x;
