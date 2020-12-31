@@ -1,3 +1,5 @@
+'use strict'
+
 String.prototype.isPalindrome = function(){
     let newString = this.toLowerCase().split(' ').join('');
     for(let i = newString.length - 1, a = 0; i >= 0 ; i--){
@@ -10,8 +12,19 @@ String.prototype.isPalindrome = function(){
 }
 
 function getAverageMark(marks) {
-    // код для задачи №2 писать здесь
-    // return averageMark
+    let totalSum = 0;
+
+    if(marks.length === 0){
+        return 0;
+    }
+
+    for (let i = 0; i < marks.length; i++){
+        totalSum += marks[i];
+    }
+
+    let averageMark = totalSum / marks.length;
+    let roundedAverage = Math.round(averageMark)
+    return roundedAverage;
 }
 
 function checkBirthday(birthday) {
