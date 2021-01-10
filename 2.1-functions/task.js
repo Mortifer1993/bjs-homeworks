@@ -51,3 +51,24 @@ function getAverageScore(data){
 function getAverageMark(marks){
     return marks.reduce((sum, current) => sum + current, 0) / marks.length || 0;
 }
+
+
+function getPersonData(secretData){
+    let newObject = {};
+    for( let prop in secretData ){
+        if (prop === 'aaa') {
+            newObject.firstName = getDecodedValue(secretData[prop]);
+        } else {
+            newObject.lastName = getDecodedValue(secretData[prop]);
+        }
+    }
+    return newObject;
+}
+
+function getDecodedValue(secret){
+    if(secret === 0){
+        return 'Родриго';
+    } else {
+        return 'Эмильо';
+    }
+}
