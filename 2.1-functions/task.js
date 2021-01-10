@@ -35,3 +35,19 @@ function showSolutionMessage(a, b, c){
         console.log(`Уравнение имеет два корня. X₁ = ${result.roots[0]}, X₂ = ${result.roots[1]}`);
     }
 }
+
+function getAverageScore(data){
+    let average = 0;
+    let counter = 0;
+    for(let prop in data){
+        data[prop] = getAverageMark(data[prop]);
+        average += data[prop];
+        counter++;
+    }
+    data.average = average / counter || 0 ;
+    return data;
+}
+
+function getAverageMark(marks){
+    return marks.reduce((sum, current) => sum + current, 0) / marks.length || 0;
+}
