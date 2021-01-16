@@ -11,7 +11,7 @@ class PrintEditionItem {
 
     fix(){
         let value = this._state * 1.5;
-        this.state(value);
+        this.state = value;
     }
 
     set state(value) { 
