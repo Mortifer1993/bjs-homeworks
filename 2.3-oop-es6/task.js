@@ -94,3 +94,48 @@ class Library {
     }
 }
 
+// Задача 3
+
+class StudentLog {
+    constructor(nameStudent){
+        this.nameStudent = nameStudent;
+        this.lessons = [];
+    }
+
+    getName() {
+        return this.nameStudent;
+    }
+
+    addGrade(grade, subject) {
+        if(!(this.lessons.find(item => item[subject]))){
+            this.lessons.push({[subject]:[]})
+        }
+        let value = this.lessons[this.lessons.findIndex(item => item[subject])][subject];
+        if (grade > 0 && grade <= 5){
+            value.push(grade)
+        } else {
+            console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`);
+        }
+        return value.length;
+    }
+
+    getAverageBySubject(subject) {
+        let indexCurrentValue = this.lessons.findIndex(item => item[subject]);
+        let currentValue = this.lessons[indexCurrentValue][subject];
+        return currentValue.reduce((sum, current) => sum + current, 0) / currentValue.length || 0;
+    }
+
+    getTotalAverage() {
+        let totalValue = 0;
+        for(let value of this.lessons) {
+            for (let arrValues of Object.keys(value)) {
+                console.log(arrValues);
+
+                totalValue += this.getAverageBySubject(arrValues);
+              }
+        }
+         return totalValue / this.lessons.length;
+    }
+
+}
+
