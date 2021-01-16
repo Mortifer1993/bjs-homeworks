@@ -1,5 +1,7 @@
 'use strict'
 
+/// Задача 1
+
 class PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {
         this.name = name;
@@ -64,3 +66,31 @@ class DetectiveBook extends Book {
         this.type = 'detective';
     }
 }
+
+// задача 2
+
+class Library {
+    constructor(name) {
+        this.name = name;
+        this.books = [];
+    }
+
+    addBook(book) {
+        if (book.state > 30) {
+            this.books.push(book);
+        }
+    }
+
+    findBookBy(type, value) {
+        return this.books.find(item => item[type] === value) || null;
+    }
+
+    giveBookByName(bookName) {
+       if (this.books.find(item => item.name === bookName)) {
+           let bookDelete = this.books.splice(this.books.findIndex(item => item.name === bookName), 1);
+        return bookDelete[0];
+       }
+       return null;
+    }
+}
+
