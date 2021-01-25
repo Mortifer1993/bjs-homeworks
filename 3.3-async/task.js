@@ -1,49 +1,73 @@
 'use strict'
 
 class AlarmClock {
-    constructor () {
-        this.alarmConstructor = [];
-        this.timerId;
+    constructor() {
+        this.alarmCollection = [];
+        this.timerId = null;
     }
 
-    addClock(alarmTime, fn, id) {
-
-        if (id === undefined) {
+    addClock(alarmTime, funk, id) {
+        if (!id) {
             throw new Error('Не задан параметр ID');
         }
 
-        if (this.alarmConstructor.find(item => item.id === id)) {
+        if (this.alarmCollection.find(item => item.id === id)) {
             return console.error('данный параметр id был занят ранее');
-        } else {
-            let newObject = {
-                alarmTime,
-                fn,
-                id,
-            };
-            return this.alarmConstructor.push(newObject);
         }
+
+        const newObject = {
+            alarmTime,
+            funk,
+            id,
+        };
+
+        return this.alarmCollection.push(newObject);
     }
 
     removeClock(id) {
-        let result = this.alarmConstructor.filter(item => item.id === id);
-        let numberId = this.alarmConstructor.find(item => item.id === id);
-        this.alarmConstructor.splice(numberId, 1);
-        return  result;
+        let result = this.alarmCollection.findIndex(item => item.id === id);
+        if (result + 1) {
+            this.alarmCollection.splice(result, 1);
+        }
+        return !!result;
     }
 
     getCurrentFormattedTime() {
         const currentDate = new Date();
-        return `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+        let currentHours = currentDate.getHours();
+        let currentMinutes = currentDate.getMinutes();
+        if (currentHours < 10) {
+            currentHours = '0' + currentHours;
+        }
+        if (currentMinutes < 10) {
+            currentMinutes = '0' + currentMinutes;
+        }
+        return `${currentHours}:${currentMinutes}`;
     }
 
     start() {
-        return this.timerId = setInterval(checkClock(), 1000);
+        if (!this.timerId) {
+            this.timerId = setInterval(() => this.alarmCollection.forEach(item => this.checkClock(item)));
+        }
     }
 
-    checkClock() {
-        let currentTime = getCurrentFormattedTime();
-        if (this.alarmConstructor.filter(item => item.alarmTime === currentTime)) {
-            return 
+    checkClock(ring) {
+        if (ring.alarmTime === this.getCurrentFormattedTime()) {
+            ring.funk();
         }
+    }
+
+    stop() {
+        clearInterval(this.timerId);
+        this.timerId = null;
+    }
+
+    printAlarms() {
+        this.alarmCollection.forEach(item => `Будильник №${item.id} заведен на ${item.alarmTime}`)
+    }
+
+    clearAlarms() {
+        stop();
+        this.alarmCollection = [];
     }
 }
