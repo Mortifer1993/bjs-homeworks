@@ -29,7 +29,7 @@ class AlarmClock {
         if (result + 1) {
             this.alarmCollection.splice(result, 1);
         }
-        return !!result;
+        return typeOf (result);
     }
 
     getCurrentFormattedTime() {
