@@ -43,7 +43,8 @@ class AlarmClock {
     checkClock() {
         let currentTime = getCurrentFormattedTime();
         if (this.alarmConstructor.filter(item => item.alarmTime === currentTime)) {
-            return 
+            let numberIndex = this.alarmConstructor.find(item => item.alarmTime === currentTime);
+            this.alarmConstructor[numberIndex].fn();
         }
     }
 }
