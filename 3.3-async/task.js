@@ -29,7 +29,7 @@ class AlarmClock {
         if (result + 1) {
             this.alarmCollection.splice(result, 1);
         }
-        return typeOf (result);
+        return Boolean(result);
     }
 
     getCurrentFormattedTime() {
@@ -64,7 +64,8 @@ class AlarmClock {
     }
 
     printAlarms() {
-        this.alarmCollection.forEach(item => `Будильник №${item.id} заведен на ${item.alarmTime}`)
+        console.log(`Печать всех будильников в колличестве ${this.alarmCollection.length}`)
+        this.alarmCollection.forEach(item => console.log(`Будильник №${item.id} заведен на ${item.alarmTime}`));
     }
 
     clearAlarms() {
