@@ -26,15 +26,16 @@ function getTotalDamage() {
     return weapons.map(item => item.attack).reduce((sum, current) => sum + current, 0);
 }
 
-// function getValuestCountToSumValues( numberArray, currentSum) {
-// return 
-// }
+function getValuestCountToSumValues(numberArray, currentSum) {
+    let count = 0;
+    return numberArray.filter(item => !((count += item) < currentSum)).length;
+}
 
 // задача 2
 
 function sleep(milliseconds) {
     let e = new Date().getTime() + milliseconds;
-    while (new Date().getTime() <= e) { }
+    while (new Date().getTime() <= e) {}
 }
 
 function sum(...args) {
@@ -76,7 +77,7 @@ function memorize(fn, limit) {
 // задача 3
 
 function testCase(testFunction) {
-    const testArray = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
+    const testArray = [[1, 2, 3], [1, 2], [1, 2, 3], [1, 2], [9, 5, 2, 4]];
     const string = 'счетчик';
     console.time(string);
     for (let i = 0; i < 100; i++) {
