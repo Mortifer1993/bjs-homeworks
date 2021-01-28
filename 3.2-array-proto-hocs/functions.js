@@ -15,7 +15,7 @@ function getCountReliableWeapons(value) {
 }
 
 function hasReliableWeapons(value) {
-    return !!weapons.find(item => item.initDurability > value);
+    return weapons.some(item => item.initDurability > value);
 }
 
 function getReliableWeaponsNames(value) {
@@ -23,19 +23,23 @@ function getReliableWeaponsNames(value) {
 }
 
 function getTotalDamage() {
-    return weapons.map(item => item.attack).reduce((sum, current) => sum + current, 0);
+    return weapons.reduce((sum, current) => sum + current.attack, 0);
 }
 
-function getValuestCountToSumValues(numberArray, currentSum) {
-    let count = 0;
-    return numberArray.filter(item => !((count += item) < currentSum)).length;
+function getValuestCountToSumValues(numberArray, value) {
+    return numberArray.reduce((acc, currentSum) => {
+        acc.sumValue += currentSum;
+        acc.totalValue = (acc.sumValue < value) ? ++acc.totalValue : 
+                         (acc.totalValue > numberArray.length) ? numberArray.length : acc.totalValue;
+        return acc;
+    }, {sumValue: 0, totalValue: 1,}).totalValue;
 }
 
 // задача 2
 
 function sleep(milliseconds) {
     let e = new Date().getTime() + milliseconds;
-    while (new Date().getTime() <= e) {}
+    while (new Date().getTime() <= e) { }
 }
 
 function sum(...args) {
@@ -44,7 +48,7 @@ function sum(...args) {
 }
 
 function compareArrays(arr1, arr2) {
-    return arr1.every(item => item === arr2[arr1.indexOf(item)]) && arr2.every(item => item === arr1[arr2.indexOf(item)]);
+    return arr1.length === arr2.length && arr1.every((item, index) => item === arr2[index]);
 }
 
 function memorize(fn, limit) {
@@ -56,7 +60,7 @@ function memorize(fn, limit) {
             memory.shift();
         }
 
-        let checkingObject = memory.find(item => compareArrays(item.args, [...args]));
+        let checkingObject = memory.find(item => compareArrays(item.args, args));
 
         if (checkingObject) {
             return checkingObject.result;
@@ -66,7 +70,7 @@ function memorize(fn, limit) {
         let value = fn(...args);
 
         memory.push({
-            args: [...args],
+            args: args,
             result: value,
         });
 
